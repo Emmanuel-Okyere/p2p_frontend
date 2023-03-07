@@ -23,10 +23,11 @@ export class RegisterComponent {
     const emailAddress = form.value.emailAddress;
     const username = form.value.username;
     const fullName = form.value.fullName;
+    const role = form.value.role;
     const password = form.value.password;
     const confirmPassword = form.value.confirmPassword;
     this.isLoading = true;
-    this.authService.signUp(username,fullName,emailAddress,password,confirmPassword).subscribe(resData => {
+    this.authService.signUp(username,fullName,emailAddress,role,password,confirmPassword).subscribe(resData => {
       this.creationSuccess=true;
       this.successMessage = resData.message;
 

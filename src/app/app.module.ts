@@ -12,6 +12,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import {AuthInterceptorService} from "./login/auth.interceptor.service";
+import { ProfileComponent } from './profile/profile.component';
 // import {HeaderComponent} from "./header/header.component";
 
 @NgModule({
@@ -22,6 +23,7 @@ import {AuthInterceptorService} from "./login/auth.interceptor.service";
     LandingComponent,
     DashboardComponent,
     SpinnerComponent,
+    ProfileComponent,
     // HeaderComponent
   ],
   imports: [

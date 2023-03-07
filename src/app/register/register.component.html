@@ -45,6 +45,14 @@
             />
             <span *ngIf="!email.valid && email.touched">Please enter a valid email address</span>
           </div>
+          <!--Role input-->
+          <div class="form-outline mb-1">
+            <label class="form-label" for="lender">Role</label><br>
+            <input type="radio" id="lender" name="role" ngModel value="LENDER" >
+            <label for="lender" style="padding-right: 20px;">Lender</label>
+            <input type="radio" id="borrower" name="role"  ngModel value="BORROWER">
+            <label for="borrower">Borrower</label>
+          </div>
 
           <!-- Password input -->
           <div class="form-outline mb-1">

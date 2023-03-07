@@ -6,12 +6,16 @@ import {RegisterComponent} from "./register/register.component";
 import {LandingComponent} from "./landing/landing.component";
 import {DashboardComponent} from "./dashboard/dashboard.component";
 import {AuthGuard} from "./login/auth.guard";
+import {ProfileComponent} from "./profile/profile.component";
 
 const routes:Routes = [
   {path:'', component:LandingComponent},
   {path:'login', component:LoginComponent},
   {path:'register', component:RegisterComponent},
-  {path:'dashboard', component:DashboardComponent, canActivate:[AuthGuard]}
+  {path:'dashboard', component:DashboardComponent,children:[
+      {path:'profile', component:ProfileComponent, canActivate:[AuthGuard]}
+    ], canActivate:[AuthGuard]},
+  {path:'profile', component:ProfileComponent, canActivate:[AuthGuard]}
 ]
 
 @NgModule({
