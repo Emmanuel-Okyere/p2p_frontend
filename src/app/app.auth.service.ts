@@ -3,7 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject, Observable, tap} from "rxjs";
 import {UserModel} from "./login/user.model";
 import {Router} from "@angular/router";
-
+import {UserProfileResponse} from "./models/UserProfile.model";
 
 
 interface SignUpResponseData{
@@ -90,5 +90,9 @@ export class AppAuthService{
       this.logout();
     }
     ,expirationDuration)
+  }
+
+  getUserProfile():Observable<UserProfileResponse>{
+    return this.http.get<UserProfileResponse>("http://localhost:8080/api/v1/profile");
   }
 }
