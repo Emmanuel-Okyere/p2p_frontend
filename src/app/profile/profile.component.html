@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-3 border-right">
       <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-        <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+        <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg" alt="">
         <span class="font-weight-bold">Edogaru</span>
         <span class="text-black-50">edogaru@mail.com.my</span>
         <span> </span>
@@ -14,26 +14,37 @@
         <div class="d-flex justify-content-between align-items-center mb-3">
           <h4 class="text-right">User Profile</h4>
         </div>
-        <form >
+        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" *ngIf="profileForm">
         <div class="row mt-3">
-          <div class="col-md-12"><label class="labels">Name</label><input type="text" class="form-control" placeholder="Full Name" name="fullName"></div>
-        </div>
-        <div class="row mt-3">
-          <div class="col-md-12"><label class="labels">Username</label><input type="text" class="form-control" placeholder="Username" name="username"></div>
-          <div class="col-md-12"><label class="labels">Email Address</label><input type="email" class="form-control" placeholder="Email Address" name="emailAddress"></div>
-          <div class="col-md-12"><label class="labels">Date of Birth</label><input type="date" class="form-control" placeholder="Date of Birth" name="dateOfBirth"></div>
-          <div class="col-md-12" style="padding-bottom: 15px;"><label class="labels">Digital Address</label><input type="text" class="form-control" placeholder="Digital Address" name="digitalAddress"></div>
+          <div class="col-md-12">
+            <label class="labels">Full Name</label>
+            <input type="text" class="form-control" formControlName ="fullName" placeholder="Full Name" name="fullName">
+          </div>
+          <div class="col-md-12">
+            <label class="labels">Username</label>
+            <input type="text" class="form-control"  formControlName ="username" placeholder="Username" name="username">
+          </div>
+          <div class="col-md-12">
+            <label class="labels">Email Address</label>
+            <input type="email" class="form-control" formControlName ="emailAddress" placeholder="Email Address" name="emailAddress">
+          </div>
+          <div class="col-md-12"><label class="labels">Date of Birth</label>
+            <input type="date" class="form-control" formControlName ="dateOfBirth" placeholder="Date of Birth" name="dateOfBirth">
+          </div>
+          <div class="col-md-12" style="padding-bottom: 15px;"><label class="labels">Digital Address</label><input type="text" class="form-control" formControlName ="digitalAddress" placeholder="Digital Address" name="digitalAddress"></div>
           <div class="col-md-12"><h6>Telephone Numbers</h6></div>
-          <div class="col-md-12" style="padding-bottom: 15px;"><label class="labels">Telephone</label><input type="tel" class="form-control" placeholder="Telephone Number" name="telephoneNumber"></div>
+          <div class="col-md-12" style="padding-bottom: 15px;"><label class="labels">Telephone</label><input type="tel" class="form-control" formControlName="userTelephoneNumber" placeholder="Telephone Number" name="telephoneNumber"></div>
           <div class="col-md-12"><h6>Next Of Kin Information</h6></div>
-          <div class="col-md-12"><label class="labels">Full Name</label><input type="text" class="form-control" placeholder="Full Name" value=""></div>
-          <div class="col-md-12"><label class="labels">Email Address</label><input type="email" class="form-control" placeholder="Email Address" value=""></div>
+          <div class="col-md-12"><label class="labels">Full Name</label><input type="text" class="form-control" formControlName="nextOfKinFullName" placeholder="Full Name" name="fullName"></div>
+          <div class="col-md-12"><label class="labels">Email Address</label><input type="email" class="form-control" formControlName = "nextOfKinEmailAddress" placeholder="Email Address" name="emailAddress"></div>
         </div>
 <!--        <div class="row mt-3">-->
 <!--          <div class="col-md-6"><label class="labels">Country</label><input type="text" class="form-control" placeholder="country" value=""></div>-->
 <!--          <div class="col-md-6"><label class="labels">State/Region</label><input type="text" class="form-control" value="" placeholder="state"></div>-->
 <!--        </div>-->
-        <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Save Profile</button></div>
+        <div class="mt-5 text-center">
+          <button class="btn btn-primary profile-button" type="submit" [disabled]="!profileForm.valid">Save Profile</button>
+        </div>
         </form>
       </div>
     </div>
