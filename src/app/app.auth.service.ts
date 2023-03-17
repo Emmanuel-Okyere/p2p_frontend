@@ -95,4 +95,8 @@ export class AppAuthService{
   getUserProfile():Observable<UserProfileResponse>{
     return this.http.get<UserProfileResponse>("http://localhost:8080/api/v1/profile");
   }
+
+  saveUserProfile(data:any):Observable<UserProfileResponse> {
+    return this.http.post<UserProfileResponse>("http://localhost:8080/api/v1/profile",data);
+  }
 }
