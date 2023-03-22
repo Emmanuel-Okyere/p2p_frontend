@@ -17,18 +17,22 @@ export class ProfileComponent implements  OnInit {
   errorOccurredMessage:string= "";
   errorOccurred:boolean = false;
   isLoading:boolean = false;
+  nextOfKin:any;
   ngOnInit(): void {
     this.auth.getUserProfile().subscribe(resData => {
       if (resData.status === "success") {
-        this.profileForm = new FormGroup({
+          this.nextOfKin = resData.userProfile.nextOfKin?resData.userProfile.nextOfKin:null;
+          let next = !!this.nextOfKin;
+        console.log(this.nextOfKin)
+          this.profileForm = new FormGroup({
           "fullName": new FormControl({value:resData.userProfile.user.fullName, disabled:true}, [Validators.required]),
           "username": new FormControl({value:resData.userProfile.user.username,disabled:true}, [Validators.required]),
           "emailAddress": new FormControl({value:resData.userProfile.user.emailAddress,disabled:true}, [Validators.email, Validators.required]),
           "dateOfBirth": new FormControl(resData.userProfile?.dateOfBirth, [Validators.required]),
           "digitalAddress": new FormControl(resData.userProfile?.digitalAddress, [Validators.required]),
           "userTelephoneNumber":new FormControl(null, [Validators.required]),
-          "nextOfKinFullName":new FormControl(resData.userProfile?.nextOfKin?.fullName, [Validators.required]),
-          "nextOfKinEmailAddress":new FormControl(resData.userProfile?.nextOfKin?.emailAddress, [Validators.required]),
+          "nextOfKinFullName":new FormControl({value:this.nextOfKin?.fullName , disabled:next}, [Validators.required]),
+          "nextOfKinEmailAddress":new FormControl({value:this.nextOfKin?.emailAddress , disabled:next}, [Validators.required]),
         })
       }
       else {
