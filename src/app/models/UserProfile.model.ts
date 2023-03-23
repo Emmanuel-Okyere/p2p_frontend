@@ -13,16 +13,33 @@ interface  user{
   emailAddress:string
   approved:boolean
 }
-interface NextOfKin{
+export interface NextOfKin{
   fullName: string,
   emailAddress:string
 }
 interface Telephone{
   number:string,
-  verified:boolean,
 }
 export interface UserProfileResponse{
   userProfile:userProfile,
   status:string,
   message:string
+}
+export interface UserProfileRequest{
+  telephoneNumber:Telephone[],
+  dateOfBirth: Date,
+  digitalAddress:string,
+  nextOfKin:NextOfKin
+}
+
+export interface formRequest{
+  userTelephoneNumber:string,
+  dateOfBirth: Date,
+  digitalAddress:string,
+  nextOfKinFullName: string,
+  nextOfKinEmailAddress:string,
+  fullName:string,
+  username:string,
+  emailAddress:string,
+
 }
