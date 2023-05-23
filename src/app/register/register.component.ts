@@ -30,14 +30,24 @@ export class RegisterComponent {
     this.authService.signUp(username,fullName,emailAddress,role,password,confirmPassword).subscribe(resData => {
       this.creationSuccess=true;
       this.successMessage = resData.message;
-
-      form.reset()
-      setTimeout(()=>{
-          this.creationSuccess = false;
-          this.isLoading = false;
-          this.router.navigate(["login"])
-          },2000
+      if(resData.status === "success") {
+        form.reset()
+        setTimeout(() => {
+            this.creationSuccess = false;
+            this.isLoading = false;
+            this.router.navigate(["login"])
+          }, 2000
         )
+      }
+      else{
+        this.isLoading = false;
+        this.errorOccurred = true;
+        this.errorThatOccurred = resData.message;
+        setTimeout(()=>{
+            this.errorOccurred = false;
+          },10000
+        )
+      }
     },
       error => {
         this.isLoading = false;
