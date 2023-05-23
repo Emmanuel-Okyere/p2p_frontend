@@ -3,7 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject, Observable, tap} from "rxjs";
 import {UserModel} from "./login/user.model";
 import {Router} from "@angular/router";
-
+import {UserProfileResponse} from "./models/UserProfile.model";
 
 
 interface SignUpResponseData{
@@ -18,6 +18,7 @@ interface LoginResponse{
   id:number,
   username:string,
   emailAddress:string,
+  role:string
 }
 @Injectable({providedIn:'root'})
 export class AppAuthService{
@@ -26,11 +27,12 @@ export class AppAuthService{
   private tokenExpirationTimer :any;
   constructor(private http: HttpClient, private router:Router) {
   }
-  signUp(username:String, fullName:String,emailAddress:String, password:String, confirmPassword:String): Observable<SignUpResponseData>{
+  signUp(username:String, fullName:String,emailAddress:String,role:string, password:String, confirmPassword:String): Observable<SignUpResponseData>{
     return this.http.post<SignUpResponseData>('http://localhost:8080/api/v1/auth/register',{
       username:username,
       fullName:fullName,
       emailAddress: emailAddress,
+      role:role,
       password:password,
       confirmPassword:confirmPassword
     })
@@ -48,9 +50,8 @@ export class AppAuthService{
         ,resData.accessToken,
         resData.refreshToken);
       this.user.next(user);
-      this.autoLogout(new Date().getTime()+3600000)
+      // this.autoLogout(new Date().getTime()+3600000)
       localStorage.setItem("userData", JSON.stringify(user));
-      console.log(localStorage.getItem("userData"));
     }))
   }
   autoLogin(){
@@ -89,5 +90,13 @@ export class AppAuthService{
       this.logout();
     }
     ,expirationDuration)
+  }
+
+  getUserProfile():Observable<UserProfileResponse>{
+    return this.http.get<UserProfileResponse>("http://localhost:8080/api/v1/profile");
+  }
+
+  saveUserProfile(data:any):Observable<UserProfileResponse> {
+    return this.http.post<UserProfileResponse>("http://localhost:8080/api/v1/profile",data);
   }
 }
